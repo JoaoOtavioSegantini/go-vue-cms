@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    container_name: server
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/go/src/
+
+  mysql:
+    container_name: cms_admin
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=cms-database
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - 3306:3306
