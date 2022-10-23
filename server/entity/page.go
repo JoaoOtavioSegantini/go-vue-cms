@@ -1,6 +1,10 @@
 package entity
 
-import "gorm.io/gorm"
+import (
+	"html/template"
+
+	"gorm.io/gorm"
+)
 
 type Page struct {
 	Id    string `json:"id"`
@@ -10,7 +14,7 @@ type Page struct {
 
 type PageMysql struct {
 	gorm.Model
-	Title string `json:"title"`
-	Body  string `json:"body"`
-	Slug  string `json:"slug"`
+	Title string        `json:"title"`
+	Body  template.HTML `json:"body"`
+	Slug  string        `json:"slug"`
 }
