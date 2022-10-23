@@ -37,9 +37,10 @@ func main() {
 	database.Migrate()
 
 	router := gin.Default()
-	router.Static("/uploads", "./uploads")
+	router.Use(middlewares.CORS())
 
-	router.Use(middlewares.CORSMiddleware())
+	router.Static("/uploads", "./uploads")
+	router.LoadHTMLGlob("templates/*.html")
 
 	api := router.Group("/api")
 	{
@@ -52,7 +53,6 @@ func main() {
 			err := auth.ValidateToken(tok)
 			if err != nil {
 				ctx.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
-				ctx.Abort()
 				return
 			}
 
@@ -61,7 +61,6 @@ func main() {
 
 			if err != nil {
 				ctx.String(http.StatusInternalServerError, err.Error())
-				ctx.Abort()
 				return
 			}
 
@@ -69,24 +68,43 @@ func main() {
 		})
 
 	}
-	// Simple group: v1
-	v1 := router.Group("/api/v1").Use(middlewares.Auth())
+
+	pages_site := router.Group("/home")
 	{
-		v1.GET("/posts", postController.FindAll)
-		v1.POST("/posts", postController.Save)
-		v1.PUT("/posts/:id", postController.Update)
-		v1.GET("/posts/:id", postController.FindById)
-		v1.DELETE("/posts/:id", postController.Delete)
-		v1.GET("/pages", pageController.FindAll)
-		v1.POST("/pages", pageController.Save)
-		v1.PUT("/pages/:id", pageController.Update)
-		v1.GET("/pages/:id", pageController.FindById)
-		v1.DELETE("/pages/:id", pageController.Delete)
-		v1.GET("/users", userController.FindAll)
-		v1.POST("/users", userController.Save)
-		v1.PUT("/users/:id", userController.Update)
-		v1.GET("/users/:id", userController.FindById)
-		v1.DELETE("/users/:id", userController.Delete)
+		pages_site.GET("", controller.Home)
+		pages_site.GET("/:slug", controller.View)
+
+	}
+
+	router.Use(middlewares.Auth())
+	// Simple group: v1
+	v1 := router.Group("/api/v1/site-admin-posts")
+	{
+		v1.GET("", postController.FindAll)
+		v1.POST("", postController.Save)
+		v1.PUT("/:id", postController.Update)
+		v1.GET("/:id", postController.FindById)
+		v1.DELETE("/:id", postController.Delete)
+
+	}
+
+	pgs := router.Group("api/v1/res-data")
+	{
+		pgs.GET("", pageController.FindAll)
+		pgs.POST("", pageController.Save)
+		pgs.PUT("/:id", pageController.Update)
+		pgs.GET("/:id", pageController.FindById)
+		pgs.DELETE("/:id", pageController.Delete)
+
+	}
+
+	u := router.Group("api/v1/users-site-admin")
+	{
+		u.GET("", userController.FindAll)
+		u.POST("", userController.Save)
+		u.PUT("/:id", userController.Update)
+		u.GET("/:id", userController.FindById)
+		u.DELETE("/:id", userController.Delete)
 	}
 
 	router.Run(":8000")

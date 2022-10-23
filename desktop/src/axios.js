@@ -8,7 +8,8 @@ if (window.localStorage.getItem("token")) {
 }
 
 axios.defaults.baseURL = process.env.VUE_APP_BACKEND_URL
-axios.defaults.headers.post["Content-Type"] = "application/json";
+axios.defaults.headers.post['Content-Type'] = "application/json";
+
 axios.interceptors.request.use(
   function (config) {
     let defaultTitle = "Salvo com sucesso";

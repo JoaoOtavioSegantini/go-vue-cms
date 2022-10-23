@@ -17,12 +17,12 @@ const state = {
   
   const actions = {
     listUsers(context) {
-      window.axios.get('/api/v1/users').then((res) => {
+      window.axios.get('/api/v1/users-site-admin').then((res) => {
         context.commit('updateUsersList', res)
       })
     },
     getUser(context, id) {
-      return window.axios.get('/api/v1/users/' + id).then((res) => {
+      return window.axios.get('/api/v1/users-site-admin/' + id).then((res) => {
         context.commit('updateUser', res)
       })
     },
@@ -35,7 +35,7 @@ const state = {
         swalMessage: 'Seu novo usuário já está disponível'
       }
   
-      return window.axios.post('/api/v1/users', data, config).then((res) => {
+      return window.axios.post('/api/v1/users-site-admin', data, config).then((res) => {
         context.commit('addToUsersList', res)
         return res;
       })
@@ -50,12 +50,12 @@ const state = {
         swalMessage: 'Sua alteração foi publicada'
       }
   
-      return window.axios.put('/api/v1/users/' + id, data, config).then((res) => {
+      return window.axios.put('/api/v1/users-site-admin/' + id, data, config).then((res) => {
         return res;
       })
     },
     removeUser(context, id) {
-      return window.axios.delete('/api/v1/users/' + id).then((res) => {
+      return window.axios.delete('/api/v1/users-site-admin/' + id).then((res) => {
         return res;
       })
     }
