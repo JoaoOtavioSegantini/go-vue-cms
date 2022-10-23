@@ -35,7 +35,7 @@
                   <th scope="row">{{ post.ID }}</th>
                   <td>{{ post.title }}</td>
                   <td>
-                    <div class="cut-text">{{ strip(post.body) }}</div>
+                    <div class="cut-text">{{ post.body }}</div>
                   </td>
                   <td class="text-right">
                     <a

@@ -1,0 +1,79 @@
+@host = localhost:8000
+@token = {{response.response.body.token}}
+
+@id = 1
+// Register User
+POST http://{{host}}/api/user/register HTTP/1.1
+content-type: application/json
+    
+{
+ "name": "João Otávio Segantini",
+ "username": "joaotavioos",
+ "email": "joaotavioos@gmail.com",
+ "password": "123456"
+}
+
+###
+# @name response
+POST http://{{host}}/api/token
+Content-Type: application/json
+
+{
+ "email": "joaotavioos@gmail.com",
+ "password": "123456"
+}
+
+###
+GET  http://{{host}}/api/v1/users
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+GET  http://{{host}}/api/v1/users/{{id}}
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+DELETE http://{{host}}/api/v1/users/{{id}}
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+GET http://{{host}}/api/v1/posts
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+POST http://{{host}}/api/v1/posts
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+ "title": "a simple post",
+ "body": "a simple post body"
+}
+
+###
+GET  http://{{host}}/api/v1/posts/{{id}}
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+GET http://{{host}}/api/v1/pages
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+POST http://{{host}}/api/v1/pages
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+ "title": "a simple page",
+ "body": "a simple page body"
+}
+
+###
+GET  http://{{host}}/api/v1/pages/{{id}}
+Content-Type: application/json
+Authorization: {{token}}

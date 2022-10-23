@@ -85,7 +85,8 @@ export default {
     ClassicEditor.create(document.querySelector("#body"))
       .then((editor) => {
         this.editor = editor;
-        this.$store.dispatch("getPage", this.$route.params.id).then((res) => {
+        // eslint-disable-next-line no-unused-vars
+        this.$store.dispatch("getPage", this.$route.params.id).then((_res) => {
           console.log(this.page.body);
           editor.setData(this.page.body);
           this.editor = editor;
