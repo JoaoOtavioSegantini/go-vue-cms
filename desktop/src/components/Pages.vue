@@ -18,7 +18,10 @@
               <small>Gerenciamento de páginas do site</small>
             </h5>
 
-            <table class="table" aria-label="tabela contendo uma lista de páginas">
+            <table
+              class="table"
+              aria-label="tabela contendo uma lista de páginas"
+            >
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -27,7 +30,7 @@
                   <th scope="col"></th>
                 </tr>
               </thead>
-              <tbody> 
+              <tbody>
                 <tr v-for="page in pages" v-bind:key="page">
                   <th scope="row">{{ page.ID }}</th>
                   <td>{{ page.title }}</td>

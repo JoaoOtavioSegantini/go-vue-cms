@@ -12,7 +12,7 @@ const mutations = {
   },
   addToPagesList(state, res) {
     state.all.push(res.data);
-  }
+  },
 };
 
 const actions = {
@@ -27,7 +27,7 @@ const actions = {
     });
   },
   createPage(context, data) {
-   // let qs = require("qs");
+    // let qs = require("qs");
 
     let config = {
       swalTitle: "Página salva com sucesso",
@@ -47,15 +47,17 @@ const actions = {
       swalMessage: "Sua nova página já está disponível",
     };
 
-    return window.axios.put("/api/v1/res-data/" + id, data, config).then((res) => {
-      return res;
-    });
+    return window.axios
+      .put("/api/v1/res-data/" + id, data, config)
+      .then((res) => {
+        return res;
+      });
   },
   removePage(context, id) {
     return window.axios.delete("/api/v1/res-data/" + id).then((res) => {
       return res;
     });
-  }
+  },
 };
 
 export default {

@@ -6,11 +6,7 @@
           <small>AÇÕES</small>
         </p>
 
-        <a
-          :href="'/users/' + user.ID"
-          class="btn btn-secondary"
-          title="Voltar"
-        >
+        <a :href="'/users/' + user.ID" class="btn btn-secondary" title="Voltar">
           <i class="fa fa-arrow-circle-left"></i>
         </a>
       </div>

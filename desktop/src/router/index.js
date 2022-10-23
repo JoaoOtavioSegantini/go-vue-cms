@@ -6,9 +6,9 @@ const routes = [
     redirect: "/pages",
   },
   {
-    path: '/auth',
-    name: 'auth',
-    component: require('@/components/Auth').default
+    path: "/auth",
+    name: "auth",
+    component: require("@/components/Auth").default,
   },
   {
     path: "/pages",
@@ -68,7 +68,7 @@ const routes = [
   {
     path: "/users/add",
     name: "users-add",
-    component: require("@/components/Users/Add").default,
+    component: require("@/components/Users/AddPage").default,
   },
   {
     path: "/users/:id",
