@@ -24,7 +24,7 @@ axios.interceptors.request.use(
       new swal({
         title: config.swalTitle || defaultTitle,
         text: config.swalMessage || defaultMessage,
-        type: "success",
+        icon: "success",
         confirmButtonText: "Ok!",
       });
     }
@@ -63,7 +63,7 @@ axios.interceptors.response.use(
     new swal({
       title: title,
       text: text,
-      type: "error",
+      icon: "error",
       confirmButtonText: btnLabel,
     }).then(closeCallback);
 
