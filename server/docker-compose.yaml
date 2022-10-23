@@ -4,8 +4,12 @@ services:
   app:
     build: .
     container_name: server
+    command: sh -c "go run server.go"
     ports:
       - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
     volumes:
       - .:/go/src/
 
@@ -19,3 +23,7 @@ services:
       - seccomp:unconfined
     ports:
       - 3306:3306
+    healthcheck:
+        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD" ]
+        timeout: 20s
+        retries: 10
