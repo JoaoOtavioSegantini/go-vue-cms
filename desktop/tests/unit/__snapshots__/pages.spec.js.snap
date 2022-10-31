@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pages.vue renders props when passed 1`] = `
+"<div class=\\"container-fluid\\">
+  <div class=\\"row\\">
+    <div class=\\"col-1 nav\\">
+      <p class=\\"display-6\\"><small>AÇÕES</small></p><a href=\\"/pages/add\\" class=\\"btn btn-secondary\\" title=\\"Nova página\\"><i class=\\"fa fa-plus\\"></i></a>
+    </div>
+    <div class=\\"col\\">
+      <div class=\\"card\\">
+        <div class=\\"card-body\\">
+          <h5 class=\\"title\\"><i class=\\"fa fa-file-text-o\\"></i> Páginas <small>Gerenciamento de páginas do site</small></h5>
+          <table class=\\"table\\" aria-label=\\"tabela contendo uma lista de páginas\\">
+            <thead>
+              <tr>
+                <th scope=\\"col\\">#</th>
+                <th scope=\\"col\\">title</th>
+                <th scope=\\"col\\">body</th>
+                <th scope=\\"col\\"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope=\\"row\\">1</th>
+                <td>Post 1</td>
+                <td>
+                  <div class=\\"cut-text\\">A simple page text body</div>
+                </td>
+                <td class=\\"text-right\\"><a href=\\"/pages/1\\" class=\\"btn btn-primary btn-sm\\">ver</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

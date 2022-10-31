@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users.vue renders props when passed 1`] = `
+"<div class=\\"container-fluid\\">
+  <div class=\\"row\\">
+    <div class=\\"col-1 nav\\">
+      <p class=\\"display-6\\"><small>AÇÕES</small></p><a href=\\"/users/add\\" class=\\"btn btn-secondary\\" title=\\"Novo usuário\\"><i class=\\"fa fa-plus\\"></i></a>
+    </div>
+    <div class=\\"col\\">
+      <div class=\\"card\\">
+        <div class=\\"card-body\\">
+          <h5 class=\\"title\\"><i class=\\"fa fa-file-text-o\\"></i> Usuários <small>Gerenciamento de usuários</small></h5>
+          <table class=\\"table\\">
+            <thead>
+              <tr>
+                <th scope=\\"col\\">#</th>
+                <th scope=\\"col\\">name</th>
+                <th scope=\\"col\\">email</th>
+                <th scope=\\"col\\"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope=\\"row\\">1</th>
+                <td>John Doe</td>
+                <td>
+                  <div>johndoe@gmail.com</div>
+                </td>
+                <td class=\\"text-right\\"><a href=\\"/users/1\\" class=\\"btn btn-primary btn-sm\\">ver</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

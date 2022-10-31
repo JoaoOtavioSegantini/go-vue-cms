@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Posts.vue renders props when passed 1`] = `
+"<div class=\\"container-fluid\\">
+  <div class=\\"row\\">
+    <div class=\\"col-1 nav\\">
+      <p class=\\"display-6\\"><small>AÇÕES</small></p><a href=\\"/posts/add\\" class=\\"btn btn-secondary\\" title=\\"Novo artigo\\"><i class=\\"fa fa-plus\\"></i></a>
+    </div>
+    <div class=\\"col\\">
+      <div class=\\"card\\">
+        <div class=\\"card-body\\">
+          <h5 class=\\"title\\"><i class=\\"fa fa-file-text-o\\"></i> Artigos <small>Gerenciamento de artigos do blog</small></h5>
+          <table class=\\"table\\" aria-label=\\"uma tabela contendo uma lista de posts\\">
+            <thead>
+              <tr>
+                <th scope=\\"col\\">#</th>
+                <th scope=\\"col\\">title</th>
+                <th scope=\\"col\\">body</th>
+                <th scope=\\"col\\"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope=\\"row\\">1</th>
+                <td>Post 1</td>
+                <td>
+                  <div class=\\"cut-text\\">A simple post body</div>
+                </td>
+                <td class=\\"text-right\\"><a href=\\"/posts/1\\" class=\\"btn btn-primary btn-sm\\">ver</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
