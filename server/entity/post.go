@@ -15,7 +15,7 @@ type Post struct {
 
 type PostMysql struct {
 	gorm.Model
-	Title string        `json:"title"`
+	Title string        `json:"title" gorm:"unique"`
 	Body  template.HTML `json:"body"`
 	Slug  string        `json:"slug"`
 }
