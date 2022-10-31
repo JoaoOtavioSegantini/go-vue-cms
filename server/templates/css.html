@@ -1,0 +1,339 @@
+{{define "styles"}}
+<style>
+    /* CONTAINER STYLES */
+
+    .container {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        padding: 5rem;
+    }
+
+    .container>p {
+        padding-left: 4rem;
+        padding-right: 2rem;
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    .container hr {
+        border-top: 1px solid black;
+    }
+
+    .container img,
+    blockquote {
+        display: flex;
+        justify-content: center;
+    }
+
+    img {
+        max-width: 70vw;
+    }
+
+    .articles-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 6rem !important;
+    }
+
+    .card {
+        border: 1px solid gray;
+        border-radius: 25px
+    }
+
+    .card:hover {
+        border: 1px solid blue;
+
+    }
+
+    /* FOOTER STYLES  */
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        text-decoration: none;
+    }
+
+    footer {
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        background: #111;
+    }
+
+    footer .content {
+        max-width: 1350px;
+        margin: auto;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    footer .content p,
+    a {
+        color: #fff;
+    }
+
+    footer .content .part {
+        width: 33%;
+        transition: all 0.4s ease;
+    }
+
+    footer .content .title {
+        font-size: 22px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 16px;
+    }
+
+    footer .content p {
+        text-align: justify;
+    }
+
+    footer .content .lower .title {
+        margin: 24px 0 5px 0;
+    }
+
+    footer .content .lower i {
+        padding-right: 16px;
+    }
+
+    footer .content .middle {
+        padding-left: 80px;
+    }
+
+    footer .content .middle a {
+        line-height: 32px;
+    }
+
+    footer .content .right input[type="text"] {
+        height: 45px;
+        width: 95%;
+        outline: none;
+        color: #d9d9d9;
+        background: #000;
+        border-radius: 5px;
+        padding-left: 10px;
+        font-size: 17px;
+        border: 2px solid #222222;
+    }
+
+    footer .content .right input[type="submit"] {
+        height: 42px;
+        width: 95%;
+        font-size: 18px;
+        color: black;
+        font-weight: bolder;
+        background: aqua;
+        outline: none;
+        border-radius: 5px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        margin-top: 12px;
+        border: 2px solid aqua;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .content .right input[type="submit"]:hover {
+        background: none;
+        color: aqua;
+    }
+
+    footer .content .media-icons a {
+        font-size: 30px;
+        height: 60px;
+        width: 60px;
+        display: inline-block;
+        text-align: center;
+        line-height: 60px;
+        border-radius: 50%;
+        border: 2px solid #1d1c1c;
+        margin: 30px 9px 0 0;
+        transition: all 0.3s ease;
+    }
+
+    .content .media-icons a:hover {
+        border-color: aqua;
+        transform: scale(1.2);
+    }
+
+    /* footer a{
+color: aqua;
+} */
+    footer a {
+        transition: all 0.3s ease;
+    }
+
+    footer a:hover {
+        color: aqua;
+        margin-left: 10px;
+    }
+
+    /*  NAVBAR STYLES */
+    a {
+        text-decoration: none;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        height: 60px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #fafbfd;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .nav-toggler,
+    .nav-toggler-label {
+        display: none;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: black;
+    }
+
+    nav {
+        position: relative;
+        line-height: 60px;
+    }
+
+    .navbar {
+        display: flex;
+        list-style-type: none;
+    }
+
+    .navbar .nav-item {
+        margin: 0 0.5rem;
+    }
+
+    .navbar .nav-link {
+        padding: 0.5rem 0.25rem;
+        color: #888;
+    }
+
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active {
+        color: #0a0a0a;
+    }
+
+    #underline {
+        position: absolute;
+        bottom: 0;
+        height: 5px;
+        background-color: #333;
+        width: 65px;
+        border-radius: 5px 5px 0 0;
+        transition: 0.3s;
+    }
+
+    @media (max-width: 1100px) {
+        footer .content .middle {
+            padding-left: 50px;
+        }
+    }
+
+    @media (max-width: 950px) {
+        footer .content .part {
+            width: 50%;
+        }
+
+        .content .right {
+            margin-top: 40px;
+        }
+
+        .container>p {
+            padding: 0;
+            font-size: 1rem;
+        }
+
+        img {
+            max-width: 50vw;
+        }
+    }
+
+    @media (max-width: 768px) {
+        #underline {
+            display: none;
+        }
+
+        header {
+            position: relative;
+        }
+
+        .nav-toggler-label {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        nav {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            background-color: #fafbfd;
+            line-height: 40px;
+            transform: scale(1, 0);
+            transform-origin: top;
+            transition: 0.3s;
+        }
+
+        .nav-toggler:checked~nav {
+            transform: scale(1, 1);
+        }
+
+        .navbar {
+            display: block;
+            width: 100%;
+        }
+
+        .navbar .nav-item {
+            margin: 0;
+        }
+
+        .navbar .nav-link {
+            display: block;
+            padding-left: 1rem;
+            width: 100%;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            background-color: #f3f3f3;
+        }
+
+
+    }
+
+    @media (max-width: 560px) {
+        footer {
+            position: relative;
+        }
+
+        footer .content .part {
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        footer .content .middle {
+            padding-left: 0;
+        }
+    }
+</style>
+
+{{end}}
