@@ -26,7 +26,7 @@
                   </div>
                   <div class="form-group">
                     <label for="body">Conteúdo</label>
-                    <textarea class="form-control" id="body" rows="3" v-model="page.body"></textarea>
+                    <ckeditor :editor="editor" v-model="editorData" ></ckeditor>
                   </div>
                   <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>
@@ -44,12 +44,14 @@
     data() {
       return {
         page: {},
-        editor: null
+        editor: ClassicEditor,
+        editorData: '<p>Content of the editor.</p>',
+
       }
     },
     methods: {
       save() {
-        this.page.body = document.querySelector('.ck-editor__editable').innerHTML
+        this.page.body = this.editorData
         this.$store.dispatch('createPage', this.page)
           // eslint-disable-next-line no-unused-vars
           .then((_res) => {
@@ -57,16 +59,6 @@
           })
       }
     },
-    mounted () {
-      ClassicEditor
-        .create(document.querySelector('#body'))
-        .then(editor => {
-          this.editor = editor;
-        })
-        .catch(err => {
-          console.error(err.stack);
-        })
-    }
   }
   </script>
   

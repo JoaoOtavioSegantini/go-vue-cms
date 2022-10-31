@@ -41,12 +41,7 @@
               </div>
               <div class="form-group">
                 <label for="body">Conteúdo</label>
-                <textarea
-                  class="form-control"
-                  id="body"
-                  rows="3"
-                  v-model="page.body"
-                ></textarea>
+                <ckeditor :editor="editor" v-model="page.body"></ckeditor>
               </div>
               <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
@@ -62,17 +57,16 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data() {
     return {
-      editor: null,
+      editor: ClassicEditor,
     };
   },
   computed: {
     page() {
-      return {...this.$store.state.Pages.onePage};
+      return { ...this.$store.state.Pages.onePage };
     },
   },
   methods: {
     save() {
-      this.page.body = document.querySelector(".ck-editor__editable").innerHTML;
       this.$store
         .dispatch("updatePage", this.page)
         // eslint-disable-next-line no-unused-vars
@@ -82,15 +76,11 @@ export default {
     },
   },
   mounted() {
-    ClassicEditor.create(document.querySelector("#body"))
-      .then((editor) => {
-        this.editor = editor;
-        // eslint-disable-next-line no-unused-vars
-        this.$store.dispatch("getPage", this.$route.params.id).then((_res) => {
-          console.log(this.page.body);
-          editor.setData(this.page.body);
-          this.editor = editor;
-        });
+    this.$store
+      .dispatch("getPage", this.$route.params.id)
+      // eslint-disable-next-line no-unused-vars
+      .then((_res) => {
+        console.log(this.page.body);
       })
       .catch((err) => {
         console.error(err.stack);

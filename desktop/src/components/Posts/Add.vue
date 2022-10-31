@@ -41,12 +41,7 @@
               </div>
               <div class="form-group">
                 <label for="body">Conteúdo</label>
-                <textarea
-                  class="form-control"
-                  id="body"
-                  rows="3"
-                  v-model="post.body"
-                ></textarea>
+                <ckeditor :editor="editor" v-model="editorData"></ckeditor>
               </div>
               <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
@@ -63,25 +58,18 @@ export default {
   data() {
     return {
       post: {},
-      editor: null,
+      editor: ClassicEditor,
+      editorData: "<p>Content of the editor.</p>",
     };
   },
   methods: {
     save() {
-      this.post.body = document.querySelector('.ck-editor__editable').innerHTML
-      this.$store.dispatch("createPost", this.post).then((res) => {
+      this.post.body = this.editorData;
+      // eslint-disable-next-line no-unused-vars
+      this.$store.dispatch("createPost", this.post).then((_res) => {
         this.$router.push({ path: "/posts" });
       });
     },
-  },
-  mounted() {
-    ClassicEditor.create(document.querySelector("#body"))
-      .then((editor) => {
-        this.editor = editor;
-      })
-      .catch((err) => {
-        console.error(err.stack);
-      });
   },
 };
 </script>

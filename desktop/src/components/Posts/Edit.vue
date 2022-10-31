@@ -41,12 +41,7 @@
               </div>
               <div class="form-group">
                 <label for="body">Conteúdo</label>
-                <textarea
-                  class="form-control"
-                  id="body"
-                  rows="3"
-                  v-model="post.body"
-                ></textarea>
+                <ckeditor :editor="editor" v-model="post.body"></ckeditor>
               </div>
               <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
@@ -62,17 +57,16 @@ const ClassicEditor = require("@ckeditor/ckeditor5-build-classic");
 export default {
   data() {
     return {
-      editor: null,
+      editor: ClassicEditor,
     };
   },
   computed: {
     post() {
-      return {...this.$store.state.Posts.onePost}
+      return { ...this.$store.state.Posts.onePost };
     },
   },
   methods: {
     save() {
-      this.post.body = document.querySelector(".ck-editor__editable").innerHTML;
       // eslint-disable-next-line no-unused-vars
       this.$store.dispatch("updatePost", this.post).then((_res) => {
         this.$router.push({ path: "/posts/" + this.post.ID });
@@ -80,14 +74,11 @@ export default {
     },
   },
   mounted() {
-    ClassicEditor.create(document.querySelector("#body"))
-      .then((editor) => {
-        this.editor = editor;
-        // eslint-disable-next-line no-unused-vars
-        this.$store.dispatch("getPost", this.$route.params.id).then((_res) => {
-          editor.setData(this.post.body);
-          this.editor = editor;
-        });
+    this.$store
+      .dispatch("getPost", this.$route.params.id)
+      // eslint-disable-next-line no-unused-vars
+      .then((_res) => {
+    //    console.log(this.post.body);
       })
       .catch((err) => {
         console.error(err.stack);
