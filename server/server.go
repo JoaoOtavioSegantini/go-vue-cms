@@ -52,6 +52,7 @@ func main() {
 
 			err := auth.ValidateToken(tok)
 			if err != nil {
+				ctx.Abort()
 				ctx.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 				return
 			}
@@ -60,6 +61,7 @@ func main() {
 			err = ctx.SaveUploadedFile(file, "uploads/"+file.Filename)
 
 			if err != nil {
+				ctx.Abort()
 				ctx.String(http.StatusInternalServerError, err.Error())
 				return
 			}
@@ -73,6 +75,7 @@ func main() {
 	{
 		pages_site.GET("", controller.Home)
 		pages_site.GET("/:slug", controller.View)
+		pages_site.GET("/articles/:slug", controller.Show)
 
 	}
 
