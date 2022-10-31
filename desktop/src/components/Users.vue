@@ -28,7 +28,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="user in users">
+                <tr v-for="user in users" v-bind:key="user">
                   <th scope="row">{{ user.ID }}</th>
                   <td>{{ user.name }}</td>
                   <td>

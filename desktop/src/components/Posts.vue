@@ -59,12 +59,7 @@ export default {
   computed: {
     posts() {
       return this.$store.state.Posts.all;
-    },
-    strip(value) {
-      let tmp = document.createElement("div");
-      tmp.innerHTML = value;
-      return tmp.textContent || tmp.innerHTML;
-    },
+    }
   },
   mounted() {
     this.$store.dispatch("listPosts");

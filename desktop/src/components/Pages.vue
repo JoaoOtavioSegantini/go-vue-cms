@@ -59,12 +59,7 @@ export default {
   computed: {
     pages() {
       return this.$store.state.Pages.all;
-    },
-    strip(value) {
-      let tmp = document.createElement("div");
-      tmp.innerHTML = String(value);
-      return tmp.textContent || tmp.innerHTML;
-    },
+    }
   },
   mounted() {
     this.$store.dispatch("listPages");
