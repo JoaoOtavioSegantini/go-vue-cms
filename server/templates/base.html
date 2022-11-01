@@ -29,7 +29,9 @@
 
             <ul class="navbar">
                 {{ range .menus }}
-                {{ if eq .Slug $slug }} <li class="nav-item"><a href="/home/{{ .Slug }}" class="nav-link active">{{
+                {{ if eq .Slug "home" }} <li class="nav-item"><a href="/home" class="nav-link active">{{
+                        .Title }}</a></li>
+                {{ else if eq .Slug $slug }} <li class="nav-item"><a href="/home/{{ .Slug }}" class="nav-link active">{{
                         .Title }}</a></li>
                 {{ else }} <li class="nav-item"><a href="/home/{{ .Slug }}" class="nav-link">{{ .Title }}</a></li>
                 {{ end }}
