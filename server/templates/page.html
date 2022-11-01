@@ -10,18 +10,30 @@
         <h5 class="card-title">{{ .Title }}</h5>
         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
             This content is a little bit longer.</p>
-        <a href="/home/articles/{{ .Slug }}" class="btn btn-primary">Ler</a>
+        <a href="/home/articles/{{ .Slug }}" class="btn btn-primary">Ler mais >></a>
         <p class="card-text"><small class="text-muted">{{ .CreatedAt }}</small></p>
     </div>
 </div>
 {{ end }}
+
+<div>
+    Page {{ .pagination }}/{{ .pageCount }}
+</div>
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="/home?page=0">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="/home?page=1">1</a></li>
-        <li class="page-item"><a class="page-link" href="/home?page=2">2</a></li>
-        <li class="page-item"><a class="page-link" href="/home?page=3">3</a></li>
-        <li class="page-item"><a class="page-link" href="/home?page=1">Next</a></li>
+        {{ if .prevPage }}
+        <li class="page-item"><a class="page-link" href="/home?page={{ .prevPage }}">Previous</a></li>
+        {{ end }}
+
+        {{ range .pages }}
+        {{ if eq . $.pagination }}<li class="page-item current"><strong>{{ . }}</strong></li>
+        {{ else }} <li class="page-item"><a class="page-link" href="/home?page={{ . }}">{{ . }}</a></li>
+        {{ end }}
+        {{ end }}
+
+        {{ if .nextPage }}
+        <li class="page-item"><a class="page-link" href="/home?page={{ .nextPage }}">Next</a></li>
+        {{ end }}
     </ul>
 </nav>
 {{end}}
