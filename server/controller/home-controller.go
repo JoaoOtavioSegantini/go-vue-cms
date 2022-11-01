@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"fmt"
+	"math"
 	"net/http"
 	"strconv"
 
@@ -10,31 +12,67 @@ import (
 )
 
 func Home(context *gin.Context) {
-	var page entity.PageMysql
-	var menus []entity.PageMysql
-	var posts []entity.PostMysql
-	var total int64
 
-	offset := context.Request.URL.Query().Get("page")
+	var (
+		page               entity.PageMysql
+		menus              []entity.PageMysql
+		posts              []entity.PostMysql
+		total              int64
+		prevPage, nextPage string
+	)
 
-	if offset == "" {
-		offset = "0"
-	}
+	const limit = 10
 
-	pagination, err := strconv.Atoi(offset)
+	pageStr := context.DefaultQuery("page", "1")
+	pagination, err := strconv.Atoi(pageStr)
 
 	if err != nil {
-		context.Abort()
-		context.JSON(http.StatusInternalServerError, err.Error())
+		context.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
 
 	database.Instance.Model(&page).First(&page)
 	database.Instance.Find(&menus)
-	database.Instance.Model(&posts).Count(&total).Offset(pagination).Limit(10).Find(&posts)
+	database.Instance.Model(&posts).Count(&total)
 
-	context.HTML(http.StatusOK, "page.html", gin.H{"page": page, "menus": menus, "posts": posts})
+	pageCount := int(math.Ceil(float64(total) / float64(limit)))
 
+	if pageCount == 0 {
+		pageCount = 1
+	}
+
+	if pagination < 1 || pagination > pageCount {
+		context.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+
+	offset := (pagination - 1) * limit
+
+	database.Instance.Model(&posts).Offset(offset).Limit(limit).Find(&posts)
+
+	if pagination > 1 {
+		prevPage = fmt.Sprintf("%d", pagination-1)
+	}
+	if pagination < pageCount {
+		nextPage = fmt.Sprintf("%d", pagination+1)
+	}
+
+	pages := make([]int, pageCount)
+
+	for i := 0; i < pageCount; i++ {
+		pages[i] = i + 1
+	}
+
+	context.HTML(http.StatusOK, "page.html", gin.H{
+		"page":       page,
+		"menus":      menus,
+		"posts":      posts,
+		"pageCount":  pageCount,
+		"pagination": pagination,
+		"prevPage":   prevPage,
+		"nextPage":   nextPage,
+		"pages":      pages,
+	})
 }
 
 func View(context *gin.Context) {
@@ -57,6 +95,6 @@ func Show(context *gin.Context) {
 
 	slug := context.Param("slug")
 	database.Instance.Model(&post).Where("Slug = ?", slug).Find(&post)
-	context.HTML(http.StatusOK, "articles.html", gin.H{"page": page, "menus": menus, "post": post})
 
+	context.HTML(http.StatusOK, "articles.html", gin.H{"page": page, "menus": menus, "post": post})
 }
