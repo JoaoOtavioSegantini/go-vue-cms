@@ -5,6 +5,7 @@ import (
 
 	"github.com/joaotavioos/cms-server/entity"
 	"gorm.io/driver/mysql"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -13,7 +14,15 @@ var dbError error
 
 func Connect(connectionString string) {
 
-	Instance, dbError = gorm.Open(mysql.Open(connectionString), &gorm.Config{})
+	if connectionString == "" {
+		dbUri := ":memory:"
+
+		Instance, dbError = gorm.Open(sqlite.Open(dbUri), &gorm.Config{})
+
+	} else {
+		Instance, dbError = gorm.Open(mysql.Open(connectionString), &gorm.Config{})
+	}
+
 	if dbError != nil {
 		log.Fatal(dbError)
 		panic("Cannot connect to DB")
