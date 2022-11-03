@@ -14,7 +14,6 @@ import (
 )
 
 func TestHomeRoute(t *testing.T) {
-	t.Parallel()
 	//	database.Connect("root:root@tcp(localhost:3306)/cms-database?parseTime=true")
 	database.Connect("")
 
@@ -89,7 +88,6 @@ func TestHomeRoute(t *testing.T) {
 }
 
 func TestViewRouteFirst(t *testing.T) {
-	t.Parallel()
 	//	database.Connect("root:root@tcp(localhost:3306)/cms-database?parseTime=true")
 	database.Connect("")
 
@@ -145,7 +143,6 @@ func TestViewRouteFirst(t *testing.T) {
 }
 
 func TestViewRouteSecond(t *testing.T) {
-	t.Parallel()
 	//	database.Connect("root:root@tcp(localhost:3306)/cms-database?parseTime=true")
 	database.Connect("")
 
@@ -201,7 +198,6 @@ func TestViewRouteSecond(t *testing.T) {
 }
 
 func TestShowRoute(t *testing.T) {
-	t.Parallel()
 	//	database.Connect("root:root@tcp(localhost:3306)/cms-database?parseTime=true")
 	database.Connect("")
 
