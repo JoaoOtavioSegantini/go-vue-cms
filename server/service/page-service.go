@@ -41,7 +41,9 @@ func (service *pageService) Update(ctx *gin.Context) {
 	id := ctx.Param("id")
 	ctx.BindJSON(&pageData)
 	pageData.Slug = slug.Make(pageData.Title)
-	database.Instance.Model(&pageData).Where("ID = ?", id).Updates(&pageData)
+	database.Instance.Model(&pageData).Where("ID = ?", id).Updates(&pageData).Find(&pageData)
+	ctx.JSON(http.StatusOK, pageData)
+
 }
 
 func (service *pageService) FindAll(ctx *gin.Context) {

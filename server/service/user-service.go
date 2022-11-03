@@ -37,13 +37,14 @@ func (service *userService) Update(ctx *gin.Context) {
 
 	id := ctx.Param("id")
 	ctx.BindJSON(&userData)
-	database.Instance.Model(&userData).Where("ID = ?", id).Updates(&userData)
+	database.Instance.Model(&userData).Where("ID = ?", id).Updates(&userData).Find(&userData)
+	ctx.JSON(http.StatusOK, &userData)
 }
 
 func (service *userService) FindAll(ctx *gin.Context) {
 	var users []entity.UserMysql
 
-	database.Instance.Find(&users)
+	database.Instance.Select("ID", "Name", "Username", "Email", "CreatedAt", "UpdatedAt", "DeletedAt").Find(&users)
 	ctx.JSON(http.StatusOK, users)
 
 }
