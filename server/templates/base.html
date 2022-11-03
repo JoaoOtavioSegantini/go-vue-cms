@@ -11,8 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 
     {{template "styles" }}
-
+    {{ if not .post  }}
     <title>{{ .page.Title }}</title>
+    {{ end }}
+    {{ if .post }}
+    <title>{{ .post.Title }}</title>
+    {{ end}}
 </head>
 
 <body>
@@ -28,8 +32,8 @@
             {{ $slug := .page.Slug }}
 
             <ul class="navbar">
-                {{ range .menus }}
-                {{ if eq .Slug "home" }} <li class="nav-item"><a href="/home" class="nav-link active">{{
+                {{ range $index, $e := .menus }}
+                {{ if and (eq $index 0) (eq $slug .Slug) }} <li class="nav-item"><a href="/home" class="nav-link active">{{
                         .Title }}</a></li>
                 {{ else if eq .Slug $slug }} <li class="nav-item"><a href="/home/{{ .Slug }}" class="nav-link active">{{
                         .Title }}</a></li>
