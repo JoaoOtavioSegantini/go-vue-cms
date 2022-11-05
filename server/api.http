@@ -5,6 +5,7 @@
 // Register User
 POST http://{{host}}/api/user/register HTTP/1.1
 content-type: application/json
+Authorization: Basic admin:admin
     
 {
  "name": "João Otávio Segantini",

@@ -27,10 +27,14 @@ func SetupRouter(r *gin.Engine, urlTemplates string) *gin.Engine {
 	r.Static("/uploads", "./uploads")
 	r.LoadHTMLGlob(urlTemplates)
 
+	r.GET("/", func(c *gin.Context) {
+		http.Redirect(c.Writer, c.Request, "/home", http.StatusSeeOther)
+	})
+
 	api := r.Group("/api")
 	{
 		api.POST("/token", controller.GenerateToken)
-		api.POST("/user/register", controller.RegisterUser)
+		api.POST("/user/register", gin.BasicAuth(gin.Accounts{os.Getenv("USER"): os.Getenv("PASSWORD")}), controller.RegisterUser)
 		api.POST("/v1/image/upload", func(ctx *gin.Context) {
 			tok := ctx.Request.URL.Query().Get("token")
 			url := os.Getenv("SERVER_URL")
@@ -58,6 +62,7 @@ func SetupRouter(r *gin.Engine, urlTemplates string) *gin.Engine {
 
 	pages_site := r.Group("/home")
 	{
+
 		pages_site.GET("", controller.Home)
 		pages_site.GET("/:slug", controller.View)
 		pages_site.GET("/articles/:slug", controller.Show)
