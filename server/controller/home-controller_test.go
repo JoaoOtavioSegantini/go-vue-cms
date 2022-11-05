@@ -35,13 +35,17 @@ func TestHomeRoute(t *testing.T) {
 	page3.Slug = slug.Make(page3.Title)
 
 	post.Title = "A simple test title for first post"
+	post.Body = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32."
 	post.Slug = slug.Make(post.Title)
 	post1.Title = "A simple test title for post 1"
 	post1.Slug = slug.Make(post1.Title)
+	post1.Body = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32."
 	post2.Title = "A simple test title for post 2"
 	post2.Slug = slug.Make(post2.Title)
+	post2.Body = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32."
 	post3.Title = "A simple test title for post 3"
 	post3.Slug = slug.Make(post3.Title)
+	post3.Body = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32."
 
 	database.Instance.Create(&page)
 	database.Instance.Create(&page1)
@@ -135,7 +139,7 @@ func TestViewRouteFirst(t *testing.T) {
 	assert.NotContains(t, w.Body.String(), page3.Body)
 
 	assert.Contains(t, w.Body.String(), "<a href=\"/home\" class=\"logo\">Segantini's Blog</a>")
-	//	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home\" class=\"nav-link\">Home</a></li>")
+	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home\" class=\"nav-link\">Home</a></li>")
 	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home/links\" class=\"nav-link active\">Links</a></li>")
 	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home/fale-conosco\" class=\"nav-link\">Fale conosco</a></li>")
 	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home/sobre-nos\" class=\"nav-link\">Sobre nós</a></li>")
@@ -190,7 +194,7 @@ func TestViewRouteSecond(t *testing.T) {
 	assert.NotContains(t, w.Body.String(), page3.Body)
 
 	assert.Contains(t, w.Body.String(), "<a href=\"/home\" class=\"logo\">Segantini's Blog</a>")
-	//	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home\" class=\"nav-link\">Home</a></li>")
+	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home\" class=\"nav-link\">Home</a></li>")
 	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home/links\" class=\"nav-link\">Links</a></li>")
 	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home/fale-conosco\" class=\"nav-link\">Fale conosco</a></li>")
 	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home/sobre-nos\" class=\"nav-link active\">Sobre nós</a></li>")
@@ -251,9 +255,10 @@ func TestShowRoute(t *testing.T) {
 	assert.NotContains(t, w.Body.String(), page1.Body)
 	assert.NotContains(t, w.Body.String(), "<title>Fale conosco</title>")
 	assert.NotContains(t, w.Body.String(), page3.Body)
-
+	assert.Contains(t, w.Body.String(), "<h3>"+post.Title+"</h3>")
+	assert.Contains(t, w.Body.String(), "<small class=\"text-muted\">Postado em: "+post.CreatedAt.Format("02 Jan, 2006 15:04:05")+"</small>")
 	assert.Contains(t, w.Body.String(), "<a href=\"/home\" class=\"logo\">Segantini's Blog</a>")
-	//assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home\" class=\"nav-link\">Home</a></li>")
+	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home\" class=\"nav-link\">Home</a></li>")
 	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home/links\" class=\"nav-link\">Links</a></li>")
 	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home/fale-conosco\" class=\"nav-link\">Fale conosco</a></li>")
 	assert.Contains(t, w.Body.String(), "<li class=\"nav-item\"><a href=\"/home/sobre-nos\" class=\"nav-link\">Sobre nós</a></li>")
