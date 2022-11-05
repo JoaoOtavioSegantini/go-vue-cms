@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 	"time"
 
@@ -312,5 +313,71 @@ func TestUserDelete(t *testing.T) {
 
 	assert.Equal(t, http.StatusNoContent, w.Code)
 	assert.Equal(t, count, int64(1))
+
+}
+
+func TestRegisterUserUnauthenticated(t *testing.T) {
+	database.Connect("")
+
+	database.Migrate()
+	w := httptest.NewRecorder()
+
+	ctx, r := gin.CreateTestContext(w)
+
+	routes.SetupRouter(r, "../templates/*.html")
+
+	user := entity.UserMysql{
+		Name:     "fake",
+		Email:    "fake@gmail.com",
+		Password: "fake",
+		Username: "User fake",
+	}
+
+	jsonValue, _ := json.Marshal(user)
+
+	req, err := http.NewRequestWithContext(ctx, "POST", "/api/user/register", bytes.NewBuffer(jsonValue))
+	if err != nil {
+		t.Errorf("got error: %s", err)
+	}
+
+	req.Header.Add("Content-Type", "application/json")
+	//	req.Header.Add("Content-Length", strconv.Itoa(len(registrationPayload)))
+	r.ServeHTTP(w, req)
+
+	assert.Equal(t, http.StatusUnauthorized, w.Code)
+	assert.Equal(t, w.Body.String(), "")
+
+}
+
+func TestRegisterUserAuthenticate(t *testing.T) {
+	database.Connect("")
+
+	database.Migrate()
+	w := httptest.NewRecorder()
+
+	ctx, r := gin.CreateTestContext(w)
+
+	routes.SetupRouter(r, "../templates/*.html")
+
+	user := entity.UserMysql{
+		Name:     "fake",
+		Email:    "fake@gmail.com",
+		Password: "fake",
+		Username: "User fake",
+	}
+
+	jsonValue, _ := json.Marshal(user)
+
+	req, err := http.NewRequestWithContext(ctx, "POST", "/api/user/register", bytes.NewBuffer(jsonValue))
+	if err != nil {
+		t.Errorf("got error: %s", err)
+	}
+
+	req.Header.Add("Content-Type", "application/json")
+	req.SetBasicAuth(os.Getenv("USER"), os.Getenv("PASSWORD"))
+	r.ServeHTTP(w, req)
+
+	assert.Equal(t, http.StatusCreated, w.Code)
+	assert.Exactly(t, w.Body.String(), "{\"email\":\"fake@gmail.com\",\"userId\":1,\"username\":\"User fake\"}")
 
 }
