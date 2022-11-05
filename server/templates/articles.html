@@ -1,3 +1,5 @@
 {{ template "base.html" . }} {{ define "articles"}}
-<div class="posts-container">{{ .post.Body }}</div>  
+<h3>{{ .post.Title }}</h3>
+<small class="text-muted">Postado em: {{ .post.CreatedAt.Format "02 Jan, 2006 15:04:05" }}</small>
+<div class="posts-container mt-5">{{ .post.Body }}</div>  
 {{ end }}

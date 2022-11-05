@@ -1,5 +1,15 @@
 {{define "styles"}}
 <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        text-decoration: none;
+    }
+
     /* CONTAINER STYLES */
 
     .container {
@@ -39,24 +49,44 @@
 
     .card {
         border: 1px solid gray;
-        border-radius: 25px
+        border-radius: 25px;
+        transition: scale .2s
     }
 
     .card:hover {
         border: 1px solid blue;
+        scale: 1.010;
 
+    }
+
+    /* POST CONTAINER STYLES */
+    .posts-container img {
+        margin: auto;
+    }
+
+    blockquote {
+        background: #f9f9f9;
+        border-left: 10px solid #00CC8F;
+        margin: 2.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C" "\201D" "\2018" "\2019";
+    }
+
+    blockquote:before {
+        color: #00CC8F;
+        content: open-quote;
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+    }
+
+    blockquote p {
+        display: inline;
+        font-size: large;
     }
 
     /* FOOTER STYLES  */
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Poppins", sans-serif;
-        text-decoration: none;
-    }
 
     footer {
         width: 100%;
@@ -181,7 +211,7 @@ color: aqua;
 
     ul {
         margin: 0;
-        padding: 0;
+        padding: 0 !important;
     }
 
     header {
@@ -219,7 +249,7 @@ color: aqua;
     }
 
     .navbar .nav-link {
-        padding: 0.5rem 0.25rem;
+        padding: 0.5rem 0.25rem !important;
         color: #888;
     }
 
@@ -228,15 +258,6 @@ color: aqua;
         color: #0a0a0a;
     }
 
-    #underline {
-        position: absolute;
-        bottom: 0;
-        height: 5px;
-        background-color: #333;
-        width: 65px;
-        border-radius: 5px 5px 0 0;
-        transition: 0.3s;
-    }
 
     li.current {
         margin-top: -11px;
@@ -336,6 +357,30 @@ color: aqua;
 
         footer .content .middle {
             padding-left: 0;
+        }
+
+        .posts-container>* {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: x-small;
+        }
+
+        .container {
+            padding: 0;
+            padding-top: 5rem;
+            padding-bottom: 2rem;
+        }
+
+        blockquote {
+            margin: 2.5em 10px !important;
+            padding: 0.5em 10px !important;
+        }
+    }
+
+    @media (max-width: 300px) {
+        header {
+            justify-content: inherit;
         }
     }
 </style>
