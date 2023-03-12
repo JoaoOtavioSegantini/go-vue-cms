@@ -25,27 +25,27 @@ Content-Type: application/json
 }
 
 ###
-GET  http://{{host}}/api/v1/users
+GET  http://{{host}}/api/v1/users-site-admin
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
-GET  http://{{host}}/api/v1/users/{{id}}
+GET  http://{{host}}/api/v1/users-site-admin/{{id}}
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
-DELETE http://{{host}}/api/v1/users/{{id}}
+DELETE http://{{host}}/api/v1/users-site-admin/{{id}}
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
-GET http://{{host}}/api/v1/posts
+GET http://{{host}}/api/v1/site-admin-posts
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
-POST http://{{host}}/api/v1/posts
+POST http://{{host}}/api/v1/site-admin-posts
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -55,17 +55,32 @@ Authorization: {{token}}
 }
 
 ###
-GET  http://{{host}}/api/v1/posts/{{id}}
+GET http://{{host}}/api/v1/site-admin-posts/{{id}}
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
-GET http://{{host}}/api/v1/pages
+PUT http://{{host}}/api/v1/site-admin-posts/{{id}}
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+ "title": "a simple post updated",
+ "body": "a simple post body updated"
+}
+
+###
+DELETE http://{{host}}/api/v1/site-admin-posts/{{id}}
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
-POST http://{{host}}/api/v1/pages
+GET http://{{host}}/api/v1/res-data
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+POST http://{{host}}/api/v1/res-data
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -75,6 +90,21 @@ Authorization: {{token}}
 }
 
 ###
-GET  http://{{host}}/api/v1/pages/{{id}}
+GET  http://{{host}}/api/v1/res-data/{{id}}
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+PUT http://{{host}}/api/v1/res-data/{{id}}
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+ "title": "a simple page updated",
+ "body": "a simple page body updated"
+}
+
+###
+DELETE http://{{host}}/api/v1/res-data/{{id}}
 Content-Type: application/json
 Authorization: {{token}}

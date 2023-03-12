@@ -30,6 +30,16 @@
                 />
               </div>
               <div class="form-group">
+                <label for="name">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="apelido do usuário"
+                  v-model="user.username"
+                />
+              </div>
+              <div class="form-group">
                 <label for="email">Email</label>
                 <input
                   type="email"
@@ -72,6 +82,9 @@ export default {
         this.$router.push({ path: "/users/" + this.user.ID });
       });
     },
+  },
+  mounted() {
+    this.$store.dispatch("getUser", this.$route.params.id);
   },
 };
 </script>

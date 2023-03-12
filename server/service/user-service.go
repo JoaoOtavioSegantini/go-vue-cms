@@ -53,7 +53,7 @@ func (service *userService) FindById(ctx *gin.Context) {
 	var user entity.UserMysql
 
 	id := ctx.Param("id")
-	database.Instance.Model(&user).Where("ID = ?", id).Find(&user)
+	database.Instance.Model(&user).Where("ID = ?", id).Select("ID", "Name", "Username", "Email", "CreatedAt", "UpdatedAt", "DeletedAt").Find(&user)
 	ctx.JSON(http.StatusOK, user)
 
 }

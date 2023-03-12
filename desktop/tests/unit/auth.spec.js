@@ -30,7 +30,7 @@ describe("Auth.vue", () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
-
+  
   function factory() {
     return mount(Auth, {
       mocks: {

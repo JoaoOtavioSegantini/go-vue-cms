@@ -18,7 +18,7 @@
               <small>Gerenciamento de usuários</small>
             </h5>
 
-            <table class="table">
+            <table class="table" aria-label="uma tabela de usuários do sistema">
               <thead>
                 <tr>
                   <th scope="col">#</th>

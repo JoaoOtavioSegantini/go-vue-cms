@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RemovePage.vue renders props.msg when passed 1`] = `
+"<div class=\\"container-fluid\\">
+  <div class=\\"row\\">
+    <div class=\\"col-1 nav\\">
+      <p class=\\"display-6\\"><small>AÇÕES</small></p><a href=\\"/pages/1\\" class=\\"btn btn-secondary\\" title=\\"Voltar\\"><i class=\\"fa fa-arrow-circle-left\\"></i></a>
+    </div>
+    <div class=\\"col-11\\">
+      <div class=\\"card\\">
+        <div class=\\"card-body\\">
+          <h5 class=\\"title\\"><i class=\\"fa fa-file-text-o\\"></i> Post 1 <small>Remoção de página do site</small></h5>
+          <div class=\\"alert alert-danger\\"> Tem certeza que quer remover esta página, essa ação não poderá ser desfeita! </div>
+        </div>
+        <div class=\\"card-footer\\"><a href=\\"/pages/1\\" class=\\"btn btn-secondary\\">Não remover</a><a href=\\"\\" class=\\"btn btn-primary\\">Apagar definitivamente</a></div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

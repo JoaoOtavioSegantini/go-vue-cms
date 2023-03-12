@@ -48,7 +48,7 @@ describe("Users.vue", () => {
     get: () => mockGet(),
   }));
 
-  it("renders props when passed", () => {
+  it("renders props when passed", async () => {
     const msg = "AÇÕES Usuários Gerenciamento de usuários#nameemail1John Doejohndoe@gmail.comver";
 
     const wrapper = factory();
